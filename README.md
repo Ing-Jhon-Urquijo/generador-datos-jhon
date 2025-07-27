@@ -1,67 +1,72 @@
-# ✈️ Proyecto LATAM – Serenity + Cucumber
+# 🧠 Generador de Datos Ficticios - Python
 
-Este proyecto consiste en la automatización UI de la funcionalidad de **búsqueda de vuelos** en el sitio web oficial de [LATAM Airlines](https://www.latamairlines.com/co/es), utilizando el framework Serenity BDD con Cucumber.
+Este proyecto genera datos ficticios simulando un entorno real para ser usados en pruebas, automatización o entrenamiento de modelos. Aplica los pilares de la programación orientada a objetos, principios SOLID, patrones de diseño, almacenamiento local en SQLite, exportación a CSV, envío de correo electrónico y ejecución en paralelo.
 
-Forma parte de una prueba técnica donde se solicitó implementar 3 casos de prueba sobre la búsqueda de vuelos, siguiendo principios de arquitectura de automatización, reutilización de datos y buenas prácticas de pruebas automatizadas.
+## 🚀 Características
 
----
+- Generación de datos ficticios (nombres, emails, teléfonos, etc.)
+- Uso de Programación Orientada a Objetos (POO)
+- Aplicación de principios **SOLID**
+- Persistencia en base de datos **SQLite**
+- Exportación de resultados a **CSV**
+- Envío del archivo generado por **correo electrónico**
+- Soporte para ejecución en **paralelo** (multi-threading)
 
-## 🧪 Objetivos de la automatización
+## 🛠 Tecnologías
 
-- Automatizar casos de prueba funcionales en la búsqueda de vuelos.
-- Aplicar principios de diseño BDD (Behavior Driven Development).
-- Utilizar datos previamente generados como entrada a las pruebas.
-- Implementar un framework estructurado y escalable con Serenity.
-
----
-
-## 🛠️ Tecnologías utilizadas
-
-| Herramienta       | Descripción                                |
-|-------------------|--------------------------------------------|
-| Java 11           | Lenguaje principal                         |
-| Maven             | Gestión de dependencias y construcción     |
-| Serenity BDD      | Framework de automatización + reportes     |
-| Cucumber          | Definición de escenarios en Gherkin        |
-| Selenium WebDriver| Automatización de navegador web            |
-| GitHub            | Repositorio de código y colaboración       |
+- **Python 3.10+**
+- SQLite (módulo `sqlite3`)
+- CSV (`csv`)
+- Envío de correos (`smtplib`, `email`)
+- Concurrencia (`threading`)
+- Buenas prácticas de arquitectura y código limpio
 
 ---
 
-## 📂 Estructura del pr
-latam-serenity/
+## 📦 Estructura del proyecto
+generador_datos/
 │
-├── src/
-│ └── test/
-│ ├── java/
-│ │ └── com.latam.test/
-│ │ ├── runners/ # Clase Runner de ejecución
-│ │ ├── stepdefinitions/ # Definiciones de pasos Cucumber
-│ │ └── tasks / questions / ... # Clases auxiliares de Serenity
-│ └── resources/
-│ └── features/
-│ └── busqueda_vuelos.feature # Escenarios en Gherkin
-│
-├── pom.xml # Configuración de dependencias y plugins
-├── serenity.properties # Configuración del proyecto Serenity
-└── README.md # Documentación general del proyecto
-## ✅ Casos de prueba implementados
+├── db_manager.py # Conexión y operaciones con SQLite
+├── data_generator.py # Generación de datos con Faker
+├── exporter.py # Exportación de datos a CSV
+├── mailer.py # Envío de archivo CSV por correo
+├── thread_manager.py # Ejecución paralela de generación
+├── main.py # Orquestador del sistema
+├── utils.py # Utilidades compartidas
+├── config.json # Configuración externa (correo, threads, etc.)
+└── requirements.txt # Dependencias del proyecto
 
-1. **Búsqueda de vuelo solo ida con origen y destino válidos**
-2. **Búsqueda de vuelo ida y regreso en fechas futuras**
-3. **Validación de mensaje cuando los campos requeridos están vacíos**
+Clonar el repositorio
+bash
+git clone https://github.com/Ing-Jhon-Urquijo/generador-datos-jhon.git
+cd generador-datos-jhon
 
-Los escenarios están definidos en el archivo `busqueda_vuelos.feature` utilizando el lenguaje Gherkin.
+Crear entorno virtual
+python -m venv venv
+source venv/bin/activate  # En Windows: venv\Scripts\activate
 
----
+Instalar dependencias
+pip install -r requirements.txt
 
-## ▶️ Cómo ejecutar el proyecto
+Configurar archivo config.json
+Edita el archivo config.json para ajustar parámetros como:
 
-### 🔧 Pre-requisitos
+Cantidad de datos a generar
 
-- Java 11 instalado y configurado (`JAVA_HOME`)
-- Maven instalado (`mvn -v`)
-- Google Chrome instalado
-- Clonar el repositorio: git clone https://github.com/Ing-Jhon-Urquijo/latam-serenity.git
-cd latam-serenity
-- Ejecutar: mvn clean verify
+Hilos a utilizar
+
+Datos del correo de envío (servidor SMTP, email y contraseña)
+{
+  "num_registros": 100,
+  "threads": 4,
+  "email": {
+    "from": "tucorreo@gmail.com",
+    "password": "tu_clave",
+    "to": "destinatario@gmail.com",
+    "smtp_server": "smtp.gmail.com",
+    "port": 587
+  }
+}
+
+Ejecutar el programa
+python main.py
